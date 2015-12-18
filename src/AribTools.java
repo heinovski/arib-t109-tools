@@ -27,7 +27,8 @@ public class AribTools {
 	 */
 	private static void generateRvcPeriods(int baseStationCount, boolean random, boolean fairness) {
 		System.out.println("\nCalculating Roadside-to-Vehicle period information details for " + baseStationCount
-				+ " base station(s) in the system using" + (random ? " random" : "") + (fairness ? " fairness" : "") + ".");
+				+ " base station(s) in the system using" + (random ? " random" : "") + (fairness ? " fairness" : "")
+				+ ".");
 
 		int[] rvcPeriodDurations = new int[_PeriodCount];
 		int[][] transmissionPeriodBegins = new int[baseStationCount][_PeriodCount];
@@ -99,7 +100,7 @@ public class AribTools {
 			}
 			sb.append("\"\n");
 		}
-		sb.append("\nLeft transmission times:\n\n\"");
+		sb.append("\nLeft transmission times in each period:\n\n\"");
 		for (int i = 0; i < _PeriodCount; i++) {
 			sb.append(leftTransmissionTimes[i]);
 			if (i + 1 != _PeriodCount) {
@@ -121,16 +122,21 @@ public class AribTools {
 		sb.append("Maximum length of a Roadside-to-Vehicle period: " + _MaxLengthOfRvcPeriod + "us");
 		System.out.print(sb.toString());
 	}
+	
+	private static void printHelpPeriods() {
+		sb.append("periods <baseStationCount> [<random> <fairness>]: Generates Roadside-to-Vehicle period information details related to the count of base stations in the system, random and fairness.\n");
+		sb.append("random = <true|false>: Determines whether a base stations uses the complete time slices or uses just a randomly chosen slice.\n");
+		// TODO sb.append("fairness = <true|false>: Determines whether a base stations uses at most a fair slice of the period time or ");
+	}
 
 	private static void printHelp() {
 		sb.append(
-				"\nTools for ARIB T109 by Julian Heinovski (mail@julian-heinovski.de). 2015.\n\nThese tools provide some functionality which will come in handy while working with the ARIB T109 communication standard for intelligent transport systems.\n");
-		sb.append("\n\n");
-		sb.append("Usage java -jar arib-t109-tools.jar [--help] <command> [args]\n");
+				"Tools for ARIB T109 by Julian Heinovski (mail@julian-heinovski.de). 2015.\n\nThese tools provide some functionality which will come in handy while working with the ARIB T109 communication standard for intelligent transport systems.\n");
+		sb.append("\nUsage java (-jar arib-t109-tools.jar) [--help] <command> [args]\n");
 		sb.append("\nThe commands are:\n");
-		sb.append("\tinfo: Displays information about the tools, e.g. known constants.");
+		sb.append("\tinfo: Displays information about the tools, e.g. known constants.\n");
 		sb.append(
-				"\n\n\tperiods <baseStationCount>: Generates Roadside-to-Vehicle period information details related to the count of base stations in the system.");
+				"\n\tperiods <baseStationCount> [<random> <fairness>]: Generates Roadside-to-Vehicle period information details related to the count of base stations in the system, random and fairness.\n");
 
 		System.out.print(sb.toString());
 	}
@@ -165,12 +171,19 @@ public class AribTools {
 			case "info":
 				printInfo();
 				break;
-			// case "help":
-			// if (args.length > 1) {
-			//
-			// } else {
-			// printHelp();
-			// }
+			case "help":
+				if (args.length > 1) {
+					switch (args[1]) {
+					case "periods":
+						printHelpPeriods();
+						break;
+					default:
+						printHelp();
+						break;
+					}
+				} else {
+					printHelp();
+				}
 			case "--help":
 				printHelp();
 				break;
