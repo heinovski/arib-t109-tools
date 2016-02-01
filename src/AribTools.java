@@ -13,7 +13,7 @@ public class AribTools {
 	private static int _PeriodCount = 16;
 	private static int _MaxPeriodLength = 6240;
 	private static int _MaxLengthOfRvcPeriod = 3024;
-	private static int _MinTransmissionLength = 1050;
+	private static int _MinTransmissionLength = 10500;
 
 	private static StringBuilder sb = new StringBuilder();
 	private static Random r = new Random();
@@ -35,18 +35,21 @@ public class AribTools {
 				+ (fairness ? " fairness" : "")
 				+ ".");
 		System.out.println(sb.toString());
-		sb.setLength(0);
 
 		int[] rvcPeriodDurations = new int[_PeriodCount];
 		int[][] transmissionPeriodBegins = new int[baseStationCount][_PeriodCount];
 		int[][] transmissionPeriodDurations = new int[baseStationCount][_PeriodCount];
 		int[] leftTransmissionTimes = new int[_PeriodCount];
 
-		sb.append("\nResults (in us):\n\n");
-		sb.append("Roadside-to-Vehicle period durations:\n\t\"");
-
 		boolean valid = true;
 		do {
+			if (!valid)
+				System.out.println("Starting next iteration...");
+			
+			sb.setLength(0);
+			sb.append("\nResults (in us):\n\n");
+			sb.append("Roadside-to-Vehicle period durations:\n\t\"");
+			
 			for (int i = 0; i < _PeriodCount; i++) {
 				int currentPeriodDuration = r
 						.nextInt(_MaxLengthOfRvcPeriod + 1);
@@ -97,6 +100,7 @@ public class AribTools {
 				if (minLength) {
 					if (completeTransmissionLength < _MinTransmissionLength) {
 						valid = false;
+						System.out.println(completeTransmissionLength);
 						break check;
 					}
 				}
@@ -176,7 +180,7 @@ public class AribTools {
 		sb.append("\nperiods [<baseStationCount>] [<minTransmissionLength> <random> <fairness>]:\n");
 		sb.append("\tGenerates Roadside-to-Vehicle period information details related to the count of base stations in the system, random and fairness.\n");
 		sb.append("\nNote: If you want to use optional flags, you have to obey the order and also use all flags before.\n\n");
-		sb.append("minTransmissionLength = <true|false = default>:\n");
+		sb.append("minTransmissionLength = <false = default>:\n");
 		sb.append("\tDetermines whether the calculation should consider a minimum transmission length for each base station.\n");
 		sb.append("random = <true|false = default>:\n");
 		sb.append("\tDetermines whether a base stations uses the complete time slices or uses just a randomly chosen slice.\n");
