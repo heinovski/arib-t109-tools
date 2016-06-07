@@ -5,4 +5,4 @@ This script generates Roadside Period Information (RVC) and Transmisson Periods 
 
 [1] TBP
 
-[2] https://veins.car2x.org
+[2] http://veins.car2x.org
