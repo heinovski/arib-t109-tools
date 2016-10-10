@@ -32,7 +32,7 @@ def main():
     """
 
     parser = argparse.ArgumentParser(description="Tools for ARIB STD-T109. Copyright (C) 2016 Julian Heinovski <mail@julian-heinovski.de>")
-    parser.add_argument("periods", type=int, help="Generates road)
+    parser.add_argument("periods", type=int, help="Generates road")
     parser.add_argument("--base-station-count")
     parser.add_argument("--minimum-length")
     parser.add_argument("--random")
