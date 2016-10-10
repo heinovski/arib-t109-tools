@@ -16,3 +16,31 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+import argparse
+
+
+# TODO generation
+def generate_rvc_periods():
+    """
+    Generates Roadside-to-Vehicle period information details according to the cound of base stations in the system.
+    """
+
+# TODO argparse
+def main():
+    """
+    """
+
+    parser = argparse.ArgumentParser(description="Tools for ARIB STD-T109. Copyright (C) 2016 Julian Heinovski <mail@julian-heinovski.de>")
+    parser.add_argument("periods", type=int, help="Generates road)
+    parser.add_argument("--base-station-count")
+    parser.add_argument("--minimum-length")
+    parser.add_argument("--random")
+    parser.add_argument("--fairness")
+
+    args = parser.parse_args()
+
+
+# entry point for interactive mode
+if __name__ == "__main__":
+    main()
