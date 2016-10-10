@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# TODO
+# Script for generating RVC period information for ARIB STD-T109.
 # Copyright (C) 2016 Julian Heinovski <julian.heinovski@ccs-labs.org>
 
 # This program is free software: you can redistribute it and/or modify
